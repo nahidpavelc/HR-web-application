@@ -1,0 +1,15 @@
+.sign-pass-wrapper {
+  position: relative;
+  display: flex;
+  margin-bottom: 14px;
+}
+
+.sign-pass-wrapper-i {
+  position: absolute;
+  top: 25%;
+  right: 6%;
+}
+.sign-pass-wrapper-i:hover {
+  color: #00fcb6;
+  cursor: pointer;
+}
