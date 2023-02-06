@@ -10,7 +10,7 @@ const eye = <FontAwesomeIcon icon={faEye} />;
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { signIn } = useContext(AuthContext);
+  const { signIn, handleGoogleSignIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Login = () => {
 
   const handleLogin = data => {
     console.log(data);
-    setLoginError(''); 
+    setLoginError('');
 
     signIn(data.email, data.password)
       .then(result => {
@@ -83,10 +83,11 @@ const Login = () => {
             {loginError && <p className="text-red-500">{loginError}</p>}
           </div>
         </form>
+
         <p>New User? <Link className="text-secondary" to="/signup">Create New Account</Link></p>
         <div className="divider">OR</div>
 
-        <button className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignUp.css'
 import { AuthContext } from '../../contexts/AuthProvider';
 
@@ -18,9 +18,9 @@ const SignUp = () => {
   const togglePasswordVisiblity = () => {
     setPasswordShown(passwordShown ? false : true);
   };
+  const naviGate = useNavigate();
 
   const handleSignUp = (data) => {
-    console.log(data);
     setSignUpError('');
 
     createUser(data.email, data.password)
@@ -32,7 +32,9 @@ const SignUp = () => {
           displayName: data.name
         }
         updateUser(userInfo)
-          .then(() => { })
+          .then(() => {
+            naviGate('/');
+          })
           .catch(err => console.log(err));
       })
       .catch(error => {
@@ -80,14 +82,12 @@ const SignUp = () => {
                 <i className='sign-pass-wrapper-i' onClick={togglePasswordVisiblity}>{eye}</i>
                 {" "}
               </div>
-
               {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
-
               <span className='pt-5'></span>
             </div>
 
             <input className="btn btn-accent w-full" value="Sign Up" type="submit" />
-            { signUpError && <p className='text-red-500'>{signUpError}</p>
+            {signUpError && <p className='text-red-500'>{signUpError}</p>
 
             }
           </form>
